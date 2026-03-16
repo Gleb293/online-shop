@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompShop - Сборки игровых ПК</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Comp<span>Shop</span></div>            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#products">Товары</a></li>
+                <li><a href="#" id="auth-btn">Войти</a></li>
+            </ul>
+            <div class="cart-icon" id="cart-btn">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Лучшие товары для вас</h1>
+                <p>Качество, стиль и доступные цены в одном месте.</p>
+                <a href="#products" class="btn">Купить сейчас</a>
+            </div>
+        </section>
+
+        <section id="products" class="products">
+            <div class="category-filters">
+                <button class="filter-btn active" onclick="filterCategory('all')">Все</button>
+                <button class="filter-btn" onclick="filterCategory('pc')">Компьютеры</button>
+                <button class="filter-btn" onclick="filterCategory('laptop')">Ноутбуки</button>
+                <button class="filter-btn" onclick="filterCategory('peripherals')">Периферия</button>
+            </div>
+            <div class="product-grid" id="product-grid">
+                <!-- Товары будут добавлены через JS -->
+            </div>
+        </section>    </main>
+
+    <!-- Модальное окно корзины -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Ваша корзина</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">Итого: <span id="total-price">0</span> руб.</div>
+            <button class="btn checkout-btn">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно регистрации/входа -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-auth">&times;</span>
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchAuth('login')">Вход</button>
+                <button class="tab-btn" onclick="switchAuth('register')">Регистрация</button>
+            </div>
+            <form id="auth-form">
+                <input type="email" id="auth-email" placeholder="Email" required>
+                <input type="password" id="auth-password" placeholder="Пароль" required>
+                <button type="submit" class="btn" id="auth-submit-btn">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно товара -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content product-details">
+            <span class="close-product">&times;</span>
+            <div class="product-detail-grid">
+                <img id="detail-image" src="" alt="">
+                <div class="detail-info">
+                    <h2 id="detail-name"></h2>
+                    <p id="detail-desc" class="full-desc"></p>
+                    <div class="specs">
+                        <h3>Характеристики:</h3>
+                        <ul id="detail-specs"></ul>
+                    </div>
+                    <p class="detail-price"><span id="detail-price"></span> руб.</p>
+                    <button id="detail-add-btn" class="btn">Добавить в корзину</button>
+                </div>
+            </div>
+            <div class="reviews-section">
+                <h3>Отзывы</h3>
+                <div id="reviews-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно админки -->
+    <div id="admin-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-admin">&times;</span>
+            <h2>Редактировать товар</h2>
+            <form id="admin-form">
+                <input type="hidden" id="admin-product-id">
+                <input type="text" id="admin-name" placeholder="Название" required>
+                <input type="number" id="admin-price" placeholder="Цена" required>
+                <textarea id="admin-desc" placeholder="Описание" required></textarea>
+                <input type="text" id="admin-image" placeholder="URL изображения" required>
+                <button type="submit" class="btn">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
