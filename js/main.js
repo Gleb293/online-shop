@@ -238,7 +238,7 @@ function updateLanguage() {
             }
         }
     });
-    
+
     document.getElementById('lang-switch').innerText = currentLang === 'ru' ? 'EN' : 'RU';
     
     const heroH1 = document.querySelector('.hero-content h1');
@@ -665,3 +665,4 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
+
