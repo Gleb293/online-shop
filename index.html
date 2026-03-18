@@ -10,12 +10,14 @@
 <body>
     <header>
         <nav class="navbar">
-            <div class="logo">Comp<span>Shop</span></div>            <ul class="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#products">Товары</a></li>
-                <li><a href="#" id="auth-btn">Войти</a></li>
-            </ul>
-            <div class="cart-icon" id="cart-btn">
+            <div class="logo">Comp<span>Shop</span></div>
+            <ul class="nav-links">
+                <li><a href="#home" data-i18n="nav_home">Главная</a></li>
+                <li><a href="#products" data-i18n="nav_products">Товары</a></li>
+                <li class="user-dropdown">
+                    <a href="#" id="auth-btn" data-i18n="nav_login">Войти</a>
+                </li>
+                <li><button id="lang-switch" class="lang-btn">EN</button></li>            </ul>            <div class="cart-icon" id="cart-btn">
                 <i class="fas fa-shopping-cart"></i>
                 <span id="cart-count">0</span>
             </div>
@@ -33,24 +35,106 @@
 
         <section id="products" class="products">
             <div class="category-filters">
-                <button class="filter-btn active" onclick="filterCategory('all')">Все</button>
-                <button class="filter-btn" onclick="filterCategory('pc')">Компьютеры</button>
-                <button class="filter-btn" onclick="filterCategory('laptop')">Ноутбуки</button>
-                <button class="filter-btn" onclick="filterCategory('peripherals')">Периферия</button>
+                <button class="filter-btn active" onclick="filterCategory('all')" data-i18n="filter_all">Все</button>
+                <button class="filter-btn" onclick="filterCategory('pc')" data-i18n="filter_pc">Компьютеры</button>
+                <button class="filter-btn" onclick="filterCategory('laptop')" data-i18n="filter_laptop">Ноутбуки</button>
+                <button class="filter-btn" onclick="filterCategory('peripherals')" data-i18n="filter_peripherals">Периферия</button>
             </div>
+            <div id="sub-filters" class="sub-filters" style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;"></div>
             <div class="product-grid" id="product-grid">
                 <!-- Товары будут добавлены через JS -->
             </div>
         </section>    </main>
 
-    <!-- Модальное окно корзины -->
-    <div id="cart-modal" class="modal">
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo">Comp<span>Shop</span></div>
+                <p style="margin-top: 1rem;" data-i18n="footer_desc">Ваш надежный партнер в мире игровых ПК и периферии. Мы собираем лучшие решения для геймеров и профессионалов.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer_links_title">Навигация</h3>
+                <ul class="footer-links">
+                    <li><a href="#home" data-i18n="nav_home">Главная</a></li>
+                    <li><a href="#products" data-i18n="nav_products">Товары</a></li>
+                    <li><a href="#" data-i18n="nav_login">Войти</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer_contact_title">Контакты</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-phone" style="margin-right: 0.5rem;"></i> +7 (999) 123-45-67</li>
+                    <li><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> support@compshop.ru</li>
+                    <li><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i> г. Москва, ул. Пушкина, д. 10</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 CompShop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Боковая панель корзины -->    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2 data-i18n="cart_title">Корзина</h2>
+            <span class="close-cart">&times;</span>
+        </div>        <div id="cart-items"></div>
+        <div class="cart-footer" style="margin-top: auto; padding-top: 2rem; border-top: 1px solid #eee;">
+            <div class="cart-total" style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.2rem; margin-bottom: 1.5rem;">
+                <span data-i18n="cart_total">Итого:</span>
+                <span><span id="total-price">0</span> руб.</span>
+            </div>
+            <button class="btn checkout-btn" id="open-checkout" style="background: black; color: white;" data-i18n="checkout_btn">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно оформления заказа -->
+    <div id="checkout-modal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Ваша корзина</h2>
-            <div id="cart-items"></div>
-            <div class="cart-total">Итого: <span id="total-price">0</span> руб.</div>
-            <button class="btn checkout-btn">Оформить заказ</button>
+            <span class="close-checkout">&times;</span>
+            <h2 style="margin-bottom: 1.5rem;" data-i18n="checkout_title">Оформление заказа</h2>            <form id="checkout-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="text" id="checkout-first-name" data-i18n="checkout_first_name" placeholder="First Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                    <input type="text" id="checkout-last-name" data-i18n="checkout_last_name" placeholder="Last Name" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <input type="email" id="checkout-email" placeholder="Email" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="tel" id="checkout-phone" data-i18n="checkout_phone" placeholder="Phone Number" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="text" id="checkout-country" data-i18n="checkout_country" placeholder="Country" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="text" id="checkout-state" data-i18n="checkout_region" placeholder="State/Region" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                <input type="text" id="checkout-address" data-i18n="checkout_address" placeholder="Address" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="text" id="checkout-city" data-i18n="checkout_city" placeholder="City" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                    <input type="text" id="checkout-postal" data-i18n="checkout_postal" placeholder="Postal Code" required style="width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <button type="submit" class="btn" style="background: black; color: white; width: 100%; margin-top: 1rem;" data-i18n="checkout_submit">Оформить</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Чат поддержки -->
+    <div class="chat-widget">
+        <div class="chat-btn" id="chat-toggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header" data-i18n="chat_header">Поддержка CompShop</div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot" style="background: #f0f0f0; padding: 0.8rem; border-radius: 8px; margin-bottom: 0.5rem; align-self: flex-start;" data-i18n="chat_welcome">
+                    Здравствуйте! Чем я могу вам помочь?
+                </div>
+            </div>
+            <form class="chat-input" id="chat-form">
+                <input type="text" id="chat-input" data-i18n="chat_placeholder" placeholder="Введите сообщение..." required>
+                <button type="submit" style="background: var(--accent-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
         </div>
     </div>
 
@@ -59,13 +143,13 @@
         <div class="modal-content">
             <span class="close-auth">&times;</span>
             <div class="auth-tabs">
-                <button class="tab-btn active" onclick="switchAuth('login')">Вход</button>
-                <button class="tab-btn" onclick="switchAuth('register')">Регистрация</button>
+                <button class="tab-btn active" onclick="switchAuth('login')" data-i18n="auth_login">Вход</button>
+                <button class="tab-btn" onclick="switchAuth('register')" data-i18n="auth_register">Регистрация</button>
             </div>
             <form id="auth-form">
                 <input type="email" id="auth-email" placeholder="Email" required>
                 <input type="password" id="auth-password" placeholder="Пароль" required>
-                <button type="submit" class="btn" id="auth-submit-btn">Войти</button>
+                <button type="submit" class="btn" id="auth-submit-btn" data-i18n="auth_submit_login">Войти</button>
             </form>
         </div>
     </div>
@@ -80,15 +164,15 @@
                     <h2 id="detail-name"></h2>
                     <p id="detail-desc" class="full-desc"></p>
                     <div class="specs">
-                        <h3>Характеристики:</h3>
+                        <h3 data-i18n="specs_title">Характеристики:</h3>
                         <ul id="detail-specs"></ul>
                     </div>
                     <p class="detail-price"><span id="detail-price"></span> руб.</p>
-                    <button id="detail-add-btn" class="btn">Добавить в корзину</button>
+                    <button id="detail-add-btn" class="btn" data-i18n="add_to_cart">Добавить в корзину</button>
                 </div>
             </div>
             <div class="reviews-section">
-                <h3>Отзывы</h3>
+                <h3 data-i18n="reviews_title">Отзывы</h3>
                 <div id="reviews-list"></div>
             </div>
         </div>
@@ -98,14 +182,14 @@
     <div id="admin-modal" class="modal">
         <div class="modal-content">
             <span class="close-admin">&times;</span>
-            <h2>Редактировать товар</h2>
+            <h2 data-i18n="admin_title">Редактировать товар</h2>
             <form id="admin-form">
                 <input type="hidden" id="admin-product-id">
                 <input type="text" id="admin-name" placeholder="Название" required>
                 <input type="number" id="admin-price" placeholder="Цена" required>
                 <textarea id="admin-desc" placeholder="Описание" required></textarea>
                 <input type="text" id="admin-image" placeholder="URL изображения" required>
-                <button type="submit" class="btn">Сохранить изменения</button>
+                <button type="submit" class="btn" data-i18n="save_changes">Сохранить изменения</button>
             </form>
         </div>
     </div>
