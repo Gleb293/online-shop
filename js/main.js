@@ -302,11 +302,13 @@ function renderProducts() {
         </div>
     `).join('');
 
+    
     const productPrice = document.getElementsByClassName("product-price");
-
+/*
     if(isSale === true){
         productPrice.style.color = 'yellow';
-    }
+    }*/
+    productPrice.style.color=isSale? 'red':'black';
 
 }
 
