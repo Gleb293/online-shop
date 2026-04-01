@@ -1,22 +1,23 @@
-// Данные о товарах
+
 let products = JSON.parse(localStorage.getItem('products')) || [
-    // КОМПЬЮТЕРЫ (15 шт)
-    { id: 1, category: 'pc', name: "Starter Gaming", price: 45000, description: { ru: "Бюджетный игровой ПК для онлайн-игр.", en: "Budget gaming PC for online games." }, specs: ["GTX 1650", "i3-12100F", "16GB RAM", "512GB SSD"], image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 2, category: 'pc', name: "Medium Power", price: 75000, description: { ru: "Сбалансированная сборка для Full HD гейминга.", en: "Balanced build for Full HD gaming." }, specs: ["RTX 3060", "i5-12400F", "16GB RAM", "1TB SSD"], image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 3, category: 'pc', name: "Cyberpunk Edition", price: 115000, description: { ru: "Мощный ПК для современных игр на высоких настройках.", en: "Powerful PC for modern games at high settings." }, specs: ["RTX 4060 Ti", "Ryzen 5 7600", "32GB DDR5", "1TB NVMe"], image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 5, category: 'pc', name: "Ultimate 4K", price: 280000, description: { ru: "Бескомпромиссная мощность для 4K гейминга.", en: "Uncompromising power for 4K gaming." }, specs: ["RTX 4090", "i9-14900K", "64GB RAM", "4TB SSD"], image: "https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 6, category: 'pc', name: "White Minimalist", price: 95000, description: { ru: "Стильная белая сборка с отличной производительностью.", en: "Stylish white build with great performance." }, specs: ["RTX 3070 White", "Ryzen 7 5800X", "16GB White RAM"], image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 9, category: 'pc', name: "RGB Overload", price: 130000, description: { ru: "Максимум подсветки и производительности.", en: "Maximum lighting and performance." }, specs: ["RTX 4070 Super", "i7-12700", "9x RGB Fans"], image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    
+    { id: 1, category: 'pc', isNew: true, name: "Starter Gaming", price: 45000, description: { ru: "Бюджетный игровой ПК для онлайн-игр.", en: "Budget gaming PC for online games." }, specs: ["GTX 1650", "i3-12100F", "16GB RAM", "512GB SSD"], image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 2, category: 'pc', isSale: true, name: "Medium Power", price: 67000, oldPrice: 75000, description: { ru: "Сбалансированная сборка для Full HD гейминга.", en: "Balanced build for Full HD gaming." }, specs: ["RTX 3060", "i5-12400F", "16GB RAM", "1TB SSD"], image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 3, category: 'pc', isNew: true, name: "Cyberpunk Edition", price: 115000, description: { ru: "Мощный ПК для современных игр на высоких настройках.", en: "Powerful PC for modern games at high settings." }, specs: ["RTX 4060 Ti", "Ryzen 5 7600", "32GB DDR5", "1TB NVMe"], image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 5, category: 'pc', isNew: true, name: "Ultimate 4K", price: 280000, description: { ru: "Бескомпромиссная мощность для 4K гейминга.", en: "Uncompromising power for 4K gaming." }, specs: ["RTX 4090", "i9-14900K", "64GB RAM", "4TB SSD"], image: "https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 6, category: 'pc', isNew: true, name: "White Minimalist", price: 95000, description: { ru: "Стильная белая сборка с отличной производительностью.", en: "Stylish white build with great performance." }, specs: ["RTX 3070 White", "Ryzen 7 5800X", "16GB White RAM"], image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 9, category: 'pc', isNew: true, name: "RGB Overload", price: 130000, description: { ru: "Максимум подсветки и производительности.", en: "Maximum lighting and performance." }, specs: ["RTX 4070 Super", "i7-12700", "9x RGB Fans"], image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80", reviews: [] },
+
     { id: 10, category: 'pc', name: "Budget King", price: 35000, description: { ru: "Лучшее решение для экономного геймера.", en: "The best solution for a budget gamer." }, specs: ["GTX 1650 Super", "Ryzen 5 3600", "16GB RAM"], image: "https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 11, category: 'pc', name: "Office Master", price: 25000, description: { ru: "Надежный ПК для офисных задач.", en: "Reliable PC for office tasks." }, specs: ["i3-10100", "8GB RAM", "256GB SSD"], image: "https://images.unsplash.com/photo-1552831388-6a0b3575b32a?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 12, category: 'pc', name: "Liquid Cool", price: 210000, description: { ru: "ПК с кастомным водяным охлаждением.", en: "PC with custom liquid cooling." }, specs: ["RTX 4080", "i7-14700K", "Custom Loop"], image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 13, category: 'pc', name: "Retro Build", price: 40000, description: { ru: "Стиль старой школы, современная начинка.", en: "Old school style, modern hardware." }, specs: ["RTX 3050", "i5-11400", "Retro Case"], image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 14, category: 'pc', name: "Silent Night", price: 125000, description: { ru: "Полностью бесшумная работа.", en: "Completely silent operation." }, specs: ["RTX 4060 Ti", "Noctua Cooling", "Silent Case"], image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 15, category: 'pc', name: "AI Developer", price: 350000, description: { ru: "Для обучения нейросетей.", en: "For neural network training." }, specs: ["2x RTX 4090", "Threadripper", "128GB RAM"], image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 101, category: 'pc', name: "Neon Striker", price: 89000, description: { ru: "Яркий дизайн и высокая скорость.", en: "Bright design and high speed." }, specs: ["RTX 4060", "i5-13400F", "32GB RAM"], image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 101, category: 'pc',isSale: true, name: "Neon Striker", price: 80000,oldPrice:89000, description: { ru: "Яркий дизайн и высокая скорость.", en: "Bright design and high speed." }, specs: ["RTX 4060", "i5-13400F", "32GB RAM"], image: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 103, category: 'pc', name: "Frost Byte", price: 62000, description: { ru: "Холодный и стабильный под нагрузкой.", en: "Cool and stable under load." }, specs: ["RTX 3050", "i5-12400", "16GB RAM"], image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=800&q=80", reviews: [] },    { id: 104, category: 'pc', name: "Titan Forge", price: 420000, description: { ru: "Максимальная мощь для рендеринга.", en: "Maximum power for rendering." }, specs: ["RTX 6000 Ada", "Threadripper 7000", "256GB RAM"], image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 105, category: 'pc', name: "Eco Stream", price: 48000, description: { ru: "Энергоэффективный ПК для стриминга.", en: "Energy efficient PC for streaming." }, specs: ["GTX 1660 Super", "i5-11400", "16GB RAM"], image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 106, category: 'pc', name: "Dragon Breath", price: 195000, description: { ru: "Агрессивный дизайн, топовое железо.", en: "Aggressive design, top hardware." }, specs: ["RTX 4080 Super", "i7-14700K", "32GB RAM"], image: "https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 106, category: 'pc',isSale:true,isNew:true, name: "Dragon Breath" ,price: 149999,oldPrice : 195000, description: { ru: "Агрессивный дизайн, топовое железо.", en: "Aggressive design, top hardware." }, specs: ["RTX 4080 Super", "i7-14700K", "32GB RAM"], image: "https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 107, category: 'pc', name: "Mini Beast", price: 110000, description: { ru: "Мощность в компактном ITX корпусе.", en: "Power in a compact ITX case." }, specs: ["RTX 4070", "i5-13600K", "32GB RAM"], image: "https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 108, category: 'pc', name: "Workstation Pro", price: 230000, description: { ru: "Для профессиональной работы с видео.", en: "For professional video work." }, specs: ["RTX 4090", "Ryzen 9 7950X", "64GB RAM"], image: "https://images.unsplash.com/photo-1552831388-6a0b3575b32a?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 109, category: 'pc', name: "Retro Wave", price: 55000, description: { ru: "Винтажный вид, современная мощь.", en: "Vintage look, modern power." }, specs: ["RTX 3060", "i5-12400", "16GB RAM"], image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80", reviews: [] },
@@ -33,11 +34,11 @@ let products = JSON.parse(localStorage.getItem('products')) || [
     { id: 213, category: 'pc', name: "Quantum", price: 380000, description: { ru: "Для сложнейших вычислений.", en: "For the most complex calculations." }, specs: ["RTX 6000 Ada", "i9-14900K", "128GB RAM"], image: "https://images.unsplash.com/photo-1587202372634-32705e3bf49c?auto=format&fit=crop&w=800&q=80", reviews: [] },    { id: 214, category: 'pc', name: "Velocity", price: 84000, description: { ru: "Скорость в каждом кадре.", en: "Speed in every frame." }, specs: ["RTX 3060 Ti", "i5-13400F", "16GB RAM"], image: "https://images.unsplash.com/photo-1591488320449-011701bb6704?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 215, category: 'pc', name: "Overlord", price: 450000, description: { ru: "Властелин игрового мира.", en: "Lord of the gaming world." }, specs: ["2x RTX 4090", "Threadripper", "256GB RAM"], image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80", reviews: [] },
 
-    // НОУТБУКИ (15 шт)   
+    
     { id: 18, category: 'laptop', name: "ThinkPad X1", price: 180000, description: { ru: "Легендарная надежность для бизнеса.", en: "Legendary reliability for business." }, specs: ["i7-1355U", "32GB RAM", "1TB SSD"], image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 19, category: 'laptop', name: "Razer Blade 14", price: 230000, description: { ru: "Самый мощный 14-дюймовый ноутбук.", en: "The most powerful 14-inch laptop." }, specs: ["RTX 4080", "Ryzen 9 7940HS", "QHD 240Hz"], image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 20, category: 'laptop', name: "Vivobook Pro", price: 85000, description: { ru: "Отличный экран для дизайнеров.", en: "Excellent screen for designers." }, specs: ["OLED 2.8K", "RTX 3050", "Ryzen 7"], image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 21, category: 'laptop', name: "MSI Katana", price: 95000, description: { ru: "Доступный игровой ноутбук.", en: "Affordable gaming laptop." }, specs: ["RTX 3050 Ti", "i5-12500H", "144Hz"], image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 21, category: 'laptop',isSale:true, name: "MSI Katana", price:83999,oldPrice: 95000, description: { ru: "Доступный игровой ноутбук.", en: "Affordable gaming laptop." }, specs: ["RTX 3050 Ti", "i5-12500H", "144Hz"], image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 22, category: 'laptop', name: "Dell XPS 15", price: 210000, description: { ru: "Премиальный ноутбук на Windows.", en: "Premium Windows laptop." }, specs: ["i9-13900H", "RTX 4060", "4K Touch"], image: "https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 25, category: 'laptop', name: "Lenovo Legion 5", price: 135000, description: { ru: "Лучшее охлаждение в классе.", en: "Best cooling in its class." }, specs: ["RTX 4060", "Ryzen 7 7735H", "165Hz"], image: "https://images.unsplash.com/photo-1602080858428-57174f9431cf?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 26, category: 'laptop', name: "Gigabyte G5", price: 88000, description: { ru: "Мощность без переплат.", en: "Power without overpaying." }, specs: ["RTX 4050", "i5-12500H", "16GB RAM"], image: "https://images.unsplash.com/photo-1580522154071-c6ca47a859ad?auto=format&fit=crop&w=800&q=80", reviews: [] },
@@ -59,10 +60,10 @@ let products = JSON.parse(localStorage.getItem('products')) || [
     { id: 222, category: 'laptop', name: "HP Victus 16", price: 98000, description: { ru: "Доступный гейминг для каждого.", en: "Affordable gaming for everyone." }, specs: ["RTX 4050", "Ryzen 5 7640HS", "144Hz"], image: "https://images.unsplash.com/photo-1602080858428-57174f9431cf?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 223, category: 'laptop', name: "Acer Swift X", price: 112000, description: { ru: "Легкий ноутбук с дискретной графикой.", en: "Lightweight laptop with discrete graphics." }, specs: ["RTX 3050 Ti", "Ryzen 7", "1.4kg"], image: "https://images.unsplash.com/photo-1580522154071-c6ca47a859ad?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 224, category: 'laptop', name: "Dell G15", price: 108000, description: { ru: "Надежный игровой ноутбук.", en: "Reliable gaming laptop." }, specs: ["RTX 4050", "i5-13450HX", "120Hz"], image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 225, category: 'laptop', name: "MacBook Air 15", price: 145000, description: { ru: "Большой экран, невероятная автономность.", en: "Large screen, incredible battery life." }, specs: ["M2 Chip", "8GB RAM", "Liquid Retina"], image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 225, category: 'laptop',isNew:true, name: "MacBook Air 15", price: 145000, description: { ru: "Большой экран, невероятная автономность.", en: "Large screen, incredible battery life." }, specs: ["M2 Chip", "8GB RAM", "Liquid Retina"], image: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&w=800&q=80", reviews: [] },
 
-    // ПЕРИФЕРИЯ (30 шт)    
-    { id: 32, category: 'peripherals', name: "Razer DeathAdder V3 Pro", price: 13000, description: { ru: "Эргономичная мышь с топовым сенсором.", en: "Ergonomic mouse with top sensor." }, specs: ["Focus Pro 30K", "64g", "Wireless"], image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    
+    { id: 32, category: 'peripherals',isNew:true, name: "Razer DeathAdder V3 Pro", price: 13000, description: { ru: "Эргономичная мышь с топовым сенсором.", en: "Ergonomic mouse with top sensor." }, specs: ["Focus Pro 30K", "64g", "Wireless"], image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 33, category: 'peripherals', name: "SteelSeries Prime Wireless", price: 9500, description: { ru: "Мышь с оптико-магнитными переключателями.", en: "Mouse with optical-magnetic switches." }, specs: ["Prestige OM", "80g", "Wireless"], image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 34, category: 'peripherals', name: "Zowie EC2-C", price: 7500, description: { ru: "Классика киберспорта, идеальная форма.", en: "Esports classic, perfect shape." }, specs: ["3360 Sensor", "Ergonomic", "Wired"], image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 35, category: 'peripherals', name: "Glorious Model O-", price: 6000, description: { ru: "Ультралегкая мышь с сотами.", en: "Ultra-light honeycomb mouse." }, specs: ["67g", "RGB", "Flexible Cable"], image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80", reviews: [] },
@@ -71,16 +72,14 @@ let products = JSON.parse(localStorage.getItem('products')) || [
     { id: 39, category: 'peripherals', name: "Anne Pro 2", price: 8500, description: { ru: "Компактная 60% клавиатура с Bluetooth.", en: "Compact 60% keyboard with Bluetooth." }, specs: ["Gateron Brown", "RGB", "Wireless"], image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 41, category: 'peripherals', name: "Logitech G915 TKL", price: 21000, description: { ru: "Низкопрофильная беспроводная механика.", en: "Low-profile wireless mechanical." }, specs: ["GL Tactile", "Lightspeed", "Aluminum"], image: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 42, category: 'peripherals', name: "HyperX Alloy Origins", price: 10000, description: { ru: "Надежная клавиатура в стальном корпусе.", en: "Reliable keyboard in steel case." }, specs: ["HyperX Red Switches", "Full RGB"], image: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 44, category: 'peripherals', name: "Dark Project KD87A", price: 9000, description: { ru: "Смазанные стабилизаторы и отличный звук.", en: "Lubed stabilizers and great sound." }, specs: ["Gateron Cap Teal", "PBT Keycaps"], image: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=800&q=80", reviews: [] },
+    { id: 44, category: 'peripherals',isSale: true,name: "Dark Project KD87A", price: 5999,oldPrice:9000, description: { ru: "Смазанные стабилизаторы и отличный звук.", en: "Lubed stabilizers and great sound." }, specs: ["Gateron Cap Teal", "PBT Keycaps"], image: "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 45, category: 'peripherals', name: "Akko 3068B Plus", price: 7500, description: { ru: "Стильная механика с крутыми кейкапами.", en: "Stylish mechanical with cool keycaps." }, specs: ["Jelly Pink Switches", "Multi-mode"], image: "https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 46, category: 'peripherals', name: "HyperX Cloud Alpha S", price: 11000, description: { ru: "Гарнитура с регулировкой баса.", en: "Headset with bass adjustment." }, specs: ["Dual Chamber", "7.1 Sound"], image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 47, category: 'peripherals', name: "Sennheiser GSP 600", price: 19000, description: { ru: "Профессиональный звук для игр.", en: "Professional sound for gaming." }, specs: ["Closed Back", "Noise Cancelling Mic"], image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 48, category: 'peripherals', name: "Logitech G733", price: 15500, description: { ru: "Легкая беспроводная гарнитура.", en: "Lightweight wireless headset." }, specs: ["Lightspeed", "Blue VO!CE", "RGB"], image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 49, category: 'peripherals', name: "SteelSeries Arctis Nova 7", price: 18500, description: { ru: "Мультиплатформенная гарнитура.", en: "Multi-platform headset." }, specs: ["Nova Acoustic System", "Wireless"], image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 50, category: 'peripherals', name: "Razer BlackShark V2 Pro", price: 16000, description: { ru: "Киберспортивная гарнитура.", en: "Esports headset." }, specs: ["Triforce 50mm", "HyperClear Mic"], image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 51, category: 'peripherals', name: "DXRacer Air", price: 35000, description: { ru: "Сетчатое игровое кресло.", en: "Mesh gaming chair." }, specs: ["Breathable Mesh", "Lumbar Support"], image: "https://images.unsplash.com/photo-1616627188280-d05cc3953049?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 52, category: 'peripherals', name: "Secretlab Titan EVO", price: 52000, description: { ru: "Лучшее игровое кресло в мире.", en: "Best gaming chair in the world." }, specs: ["Hybrid Leatherette", "Magnetic Pillow"], image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=800&q=80", reviews: [] },
-    { id: 53, category: 'peripherals', name: "Cougar Armor One", price: 18000, description: { ru: "Надежное бюджетное кресло.", en: "Reliable budget chair." }, specs: ["PVC Leather", "180 Reclining"], image: "https://images.unsplash.com/photo-1616627141033-09066929303f?auto=format&fit=crop&w=800&q=80", reviews: [] },    { id: 54, category: 'peripherals', name: "ASUS ROG Swift PG279QM", price: 85000, description: { ru: "Топовый монитор для киберспорта.", en: "Top monitor for esports." }, specs: ["240Hz", "QHD", "G-Sync"], image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 55, category: 'peripherals', name: "LG UltraGear 27GP850", price: 42000, description: { ru: "Народный выбор для 2K гейминга.", en: "People's choice for 2K gaming." }, specs: ["Nano IPS", "180Hz", "1ms"], image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 56, category: 'peripherals', name: "Zowie XL2546K", price: 55000, description: { ru: "Монитор для CS:GO и Valorant.", en: "Monitor for CS:GO and Valorant." }, specs: ["240Hz", "DyAc+ Technology"], image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 57, category: 'peripherals', name: "Blue Yeti X", price: 16000, description: { ru: "Профессиональный USB микрофон.", en: "Professional USB microphone." }, specs: ["Four-Capsule", "LED Metering"], image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80", reviews: [] },
@@ -93,7 +92,6 @@ let products = JSON.parse(localStorage.getItem('products')) || [
     { id: 119, category: 'peripherals', name: "HyperX QuadCast S", price: 14000, description: { ru: "Стильный микрофон с RGB подсветкой.", en: "Stylish microphone with RGB lighting." }, specs: ["Anti-Vibration", "Tap-to-Mute"], image: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80", reviews: [] },
     { id: 120, category: 'peripherals', name: "Sony WH-1000XM5", price: 32000, description: { ru: "Лучшее шумоподавление для работы.", en: "Best noise cancellation for work." }, specs: ["ANC", "30h Battery", "Hi-Res Audio"], image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80", reviews: [] }
 ];
-
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
 let authMode = 'login';
@@ -226,7 +224,6 @@ const translations = {
         footer_contact_title: "Contacts"
     }
 };
-
 function updateLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -238,7 +235,6 @@ function updateLanguage() {
             }
         }
     });
-
     document.getElementById('lang-switch').innerText = currentLang === 'ru' ? 'EN' : 'RU';
     
     const heroH1 = document.querySelector('.hero-content h1');
@@ -287,19 +283,31 @@ function renderProducts() {
     if (activeFilters.gpu !== 'all') {
         filtered = filtered.filter(p => p.specs && p.specs.some(s => s.toLowerCase().includes(activeFilters.gpu.toLowerCase())));
     }
-
-    grid.innerHTML = filtered.map(product => `
+    grid.innerHTML = filtered.map((product, index) => `
         <div class="product-card" onclick="openProductDetails(${product.id})">
+            ${product.isNew ? '<div class="badge">Новинка</div>' : ''}
+            ${product.isSale ? '<div class="badge sale">Скидка!</div>' : ''}
             ${currentUser && currentUser.email === 'admin@admin.com' ? `<button class="admin-btn" onclick="event.stopPropagation(); openAdminPanel(${product.id})" data-i18n="edit_product">${translations[currentLang].edit_product}</button>` : ''}
             <img src="${product.image}" alt="${product.name}" class="product-image">
             <div class="product-info">
                 <h3>${product.name}</h3>
                 <p class="product-desc">${typeof product.description === 'object' ? product.description[currentLang] : product.description}</p>
-                <p class="product-price">${product.price.toLocaleString()} ${currentLang === 'ru' ? 'руб.' : 'RUB'}</p>
+                <p class="product-price">
+                    ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toLocaleString()}</span>` : ''}
+                    ${product.newPrice ? `<span class="new-price">${product.newPrice.toLocaleString()}</span>` : ''}
+                    ${product.price.toLocaleString()} ${currentLang === 'ru' ? 'руб.' : 'RUB'}
+                </p>
                 <button class="btn" onclick="event.stopPropagation(); addToCart(${product.id})" data-i18n="add_to_cart">${translations[currentLang].add_to_cart}</button>
             </div>
         </div>
     `).join('');
+
+    const productPrice = document.getElementsByClassName("product-price");
+
+    if(isSale === true){
+        productPrice.style.color = 'yellow';
+    }
+
 }
 
 function filterCategory(category) {
@@ -574,7 +582,7 @@ function setupEventListeners() {
         if (event.target.classList.contains('modal')) event.target.style.display = 'none';
     };
 
-    // Закрытие на ESC
+   
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
@@ -652,7 +660,7 @@ function showNotification(msg) {
     }, 3000);
 }
 
-// Добавляем анимации для уведомлений
+
 const style = document.createElement('style');
 style.innerHTML = `
     @keyframes slideUp {
