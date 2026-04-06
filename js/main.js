@@ -293,6 +293,7 @@ function renderProducts() {
                 <h3>${product.name}</h3>
                 <p class="product-desc">${typeof product.description === 'object' ? product.description[currentLang] : product.description}</p>
                 <p class="product-price">
+                
                     ${product.oldPrice ? `<span class="old-price">${product.oldPrice.toLocaleString()}</span>` : ''}
                     ${product.newPrice ? `<span class="new-price">${product.newPrice.toLocaleString()}</span>` : ''}
                     ${product.price.toLocaleString()} ${currentLang === 'ru' ? 'руб.' : 'RUB'}
@@ -301,15 +302,17 @@ function renderProducts() {
             </div>
         </div>
     `).join('');
-
+  
     
-    const productPrice = document.getElementsByClassName("product-price");
-/*
-    if(isSale === true){
-        productPrice.style.color = 'yellow';
-    }*/
-    productPrice.style.color=isSale? 'red':'black';
 
+
+const allPrices = document.querySelectorAll('.product-price');
+allPrices.forEach(priceElement => {
+  const hasDiscount = priceElement.parentElement.querySelector('.old-price')
+  if (hasDiscount) {
+    priceElement.classList.add('sale-price');
+  }
+});
 }
 
 function filterCategory(category) {
