@@ -159,7 +159,6 @@ const translations = {
         add_to_cart: "В корзину",
         edit_product: "Редактировать",
         save_changes: "Сохранить изменения",
-        admin_title: "Редактировать товар",
         footer_desc: "Ваш надежный партнер в мире игровых ПК и периферии. Мы собираем лучшие решения для геймеров и профессионалов.",
         footer_links_title: "Навигация",
         footer_contact_title: "Контакты"
@@ -218,7 +217,6 @@ const translations = {
         add_to_cart: "Add to Cart",
         edit_product: "Edit",
         save_changes: "Save Changes",
-        admin_title: "Edit Product",
         footer_desc: "Your reliable partner in the world of gaming PCs and peripherals. We build the best solutions for gamers and professionals.",
         footer_links_title: "Navigation",
         footer_contact_title: "Contacts"
@@ -287,7 +285,6 @@ function renderProducts() {
         <div class="product-card" onclick="openProductDetails(${product.id})">
             ${product.isNew ? '<div class="badge">Новинка</div>' : ''}
             ${product.isSale ? '<div class="badge sale">Скидка!</div>' : ''}
-            ${currentUser && currentUser.email === 'admin@admin.com' ? `<button class="admin-btn" onclick="event.stopPropagation(); openAdminPanel(${product.id})" data-i18n="edit_product">${translations[currentLang].edit_product}</button>` : ''}
             <img src="${product.image}" alt="${product.name}" class="product-image">
             <div class="product-info">
                 <h3>${product.name}</h3>
@@ -390,37 +387,6 @@ function openProductDetails(productId) {
     modal.style.display = 'block';
 }
 
-function openAdminPanel(productId) {
-    const product = products.find(p => p.id === productId);
-    const modal = document.getElementById('admin-modal');
-    document.getElementById('admin-product-id').value = product.id;
-    document.getElementById('admin-name').value = product.name;
-    document.getElementById('admin-price').value = product.price;
-    document.getElementById('admin-desc').value = typeof product.description === 'object' ? product.description.ru : product.description;
-    document.getElementById('admin-image').value = product.image;
-    modal.style.display = 'block';
-}
-
-document.getElementById('admin-form').onsubmit = function(e) {
-    e.preventDefault();
-    const id = parseInt(document.getElementById('admin-product-id').value);
-    const productIndex = products.findIndex(p => p.id === id);
-    const oldProduct = products[productIndex];
-    
-    products[productIndex] = {
-        ...oldProduct,
-        name: document.getElementById('admin-name').value,
-        price: parseInt(document.getElementById('admin-price').value),
-        description: typeof oldProduct.description === 'object' 
-            ? { ...oldProduct.description, ru: document.getElementById('admin-desc').value }
-            : document.getElementById('admin-desc').value,
-        image: document.getElementById('admin-image').value
-    };
-    localStorage.setItem('products', JSON.stringify(products));
-    renderProducts();
-    document.getElementById('admin-modal').style.display = 'none';
-    showNotification('Товар обновлен!');
-};
 
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
@@ -514,7 +480,6 @@ function setupEventListeners() {
     const authModal = document.getElementById('auth-modal');
     const closeAuth = document.querySelector('.close-auth');
     const closeProduct = document.querySelector('.close-product');
-    const closeAdmin = document.querySelector('.close-admin');
     const closeCheckout = document.querySelector('.close-checkout');
     const langSwitch = document.getElementById('lang-switch');
 
@@ -581,7 +546,7 @@ function setupEventListeners() {
     updateAuthUI();
     closeAuth.onclick = () => authModal.style.display = 'none';
     closeProduct.onclick = () => document.getElementById('product-modal').style.display = 'none';
-    closeAdmin.onclick = () => document.getElementById('admin-modal').style.display = 'none';
+    
 
     window.onclick = (event) => {
         if (event.target.classList.contains('modal')) event.target.style.display = 'none';
@@ -678,4 +643,6 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
+
+
 

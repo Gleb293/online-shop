@@ -324,27 +324,8 @@ footer {
     display: block;
 }
 
-/* Modal Close Buttons */
-.close-product, .close-auth, .close-admin, .close-checkout, .close-settings, .close-cart {
-    position: absolute;
-    right: 1.5rem;
-    top: 1rem;
-    font-size: 2rem;
-    cursor: pointer;
-    color: var(--text-main);
-    transition: var(--transition);
-    z-index: 10;
-    line-height: 1;
-    display: block;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-}
 
-.close-product:hover, .close-auth:hover, .close-admin:hover, .close-checkout:hover, .close-settings:hover, .close-cart:hover {
-    color: var(--accent-color);
-    transform: scale(1.1);
-}
+
 
 .modal-content {
     position: relative;
@@ -723,10 +704,10 @@ header {
 }
 
 .close:hover, .close-auth:hover, .close-product:hover, .close-admin:hover {
-    color: var(--accent-color);
-    transform: rotate(90deg);
+    color: red;
+  
 }
-/* Анимации */
+
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -850,36 +831,7 @@ header {
     font-style: italic;
 }
 
-/* Админка */
-.admin-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: var(--dark-color);
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-    z-index: 10;
-    display: none;
-}
 
-.product-card:hover .admin-btn {
-    display: block;
-}
-
-#admin-form input, #admin-form textarea {
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-#admin-form textarea {
-    height: 100px;
-}
 
 @media (max-width: 768px) {
     .product-detail-grid {
