@@ -105,7 +105,9 @@ let activeFilters = {
 let currentLang = localStorage.getItem('lang') || 'ru';
 
 const translations = {
-    ru: {
+    ru:{
+        sale_product:"Скидка!",
+        new_products:"Новинка",
         nav_home: "Главная",
         nav_products: "Товары",
         nav_login: "Войти",
@@ -163,7 +165,9 @@ const translations = {
         footer_links_title: "Навигация",
         footer_contact_title: "Контакты"
     },
-    en: {
+    en:{
+        sale_product:"Sale!",
+        new_products:"New",
         nav_home: "Home",
         nav_products: "Products",
         nav_login: "Login",
@@ -221,6 +225,7 @@ const translations = {
         footer_links_title: "Navigation",
         footer_contact_title: "Contacts"
     }
+
 };
 function updateLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -257,7 +262,7 @@ function toggleLanguage() {
     updateLanguage();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {//document object model
     renderProducts();
     updateCartUI();
     setupEventListeners();
@@ -356,6 +361,8 @@ function renderSubFilters() {
                 <span style="font-weight: 600; font-size: 0.9rem;" data-i18n="filter_gpu">${translations[currentLang].filter_gpu}</span>
                 <button class="filter-btn ${activeFilters.gpu === 'all' ? 'active' : ''}" style="font-size: 0.7rem; padding: 0.4rem 0.8rem;" onclick="setTechFilter('gpu', 'all')" data-i18n="filter_all">${translations[currentLang].filter_all}</button>
                 ${gpuOptions.map(opt => `<button class="filter-btn ${activeFilters.gpu === opt ? 'active' : ''}" style="font-size: 0.7rem; padding: 0.4rem 0.8rem;" onclick="setTechFilter('gpu', '${opt}')">${opt}</button>`).join('')}
+                  
+
             </div>
         </div>
     `;
@@ -394,7 +401,7 @@ function addToCart(productId) {
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
-        cart.push({ ...product, quantity: 1 });
+        cart.push({ ...product, quantity: 1 });//...-оператор sprat         
     }
     saveCart();
     updateCartUI();
