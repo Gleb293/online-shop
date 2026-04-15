@@ -581,12 +581,14 @@ function handleAuth(e) {
     e.preventDefault();
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
+ 
     let users = JSON.parse(localStorage.getItem('users')) || [];
     if (authMode === 'register') {
         if (users.find(u => u.email === email)) return;
         users.push({ email, password, name: '' });
         localStorage.setItem('users', JSON.stringify(users));
         switchAuth('login');
+        clearForm();
     } else {
         const user = users.find(u => u.email === email && u.password === password);
         if (user) {
@@ -598,7 +600,9 @@ function handleAuth(e) {
             showNotification(translations[currentLang].notification_login);
         }
     }
+ 
 }
+
 function logout() {
     currentUser = null;
     localStorage.removeItem('currentUser');
@@ -644,5 +648,10 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
+
+function clearForm(){
+    document.getElementById('auth-password').value='';
+    document.getElementById('auth-email').value='';
+}
 
 
