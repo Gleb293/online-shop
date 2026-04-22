@@ -395,6 +395,7 @@ function openProductDetails(productId) {
 }
 
 
+
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     const existingItem = cart.find(item => item.id === productId);
@@ -449,6 +450,7 @@ function updateCartUI() {
         totalPrice.innerText = total.toLocaleString();
     }
 }
+
 
 function changeQty(id, delta) {
     const item = cart.find(i => i.id === id);
@@ -583,7 +585,7 @@ function switchAuth(mode) {
         submitBtn.innerText = translations[currentLang].auth_submit_register;
     }
 }
-
+/*
 function handleAuth(e) {
     e.preventDefault();
     const email = document.getElementById('auth-email').value;
@@ -608,6 +610,43 @@ function handleAuth(e) {
         }
     }
  
+}*/
+function handleAuth(e) {
+    e.preventDefault();
+    const email = document.getElementById('auth-email').value;
+    const password = document.getElementById('auth-password').value;
+ 
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+
+    if (authMode === 'register') {
+        if (users.find(u => u.email === email)) {
+            showNotification(currentLang === 'ru' ? 'Этот email уже занят' : 'Email already exists');
+            return;
+        }
+
+        users.push({ email, password, name: '' });
+        localStorage.setItem('users', JSON.stringify(users));
+        
+        showNotification(currentLang === 'ru' ? 'Регистрация успешна!' : 'Registration successful!');
+        
+        switchAuth('login');
+     
+        document.getElementById('auth-email').value = email;
+        document.getElementById('auth-password').value = '';
+    } else {
+        const user = users.find(u => u.email === email && u.password === password);
+        if (user) {
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            document.getElementById('auth-modal').style.display = 'none';
+            updateAuthUI();
+            renderProducts();
+            showNotification(translations[currentLang].notification_login);
+        } else {
+            showNotification(currentLang === 'ru' ? 'Неверный логин или пароль' : 'Invalid email or password');
+        }
+        clearForm();
+    }
 }
 
 function logout() {
