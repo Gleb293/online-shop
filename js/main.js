@@ -255,25 +255,14 @@ function updateLanguage() {
     
     renderProducts();
     updateCartUI();
-}*//*
-function updateLanguage() {
-   
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (translations[currentLang]?.[key]) {
-        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-          el.placeholder = translations[currentLang][key];
-        } else {
-          el.innerText = translations[currentLang][key];
-        }
-      }
-    });
-  */
-   
+}*/
+
+  
+  
 function updateLanguage() {
 
  
-  var langBtn = document.getElementById('lang-switch');
+  let langBtn = document.getElementById('lang-switch');
   if (langBtn) {
     if (currentLang === 'ru') {
       langBtn.innerText = 'EN';
@@ -283,47 +272,47 @@ function updateLanguage() {
   }
 
   
-  var heroTitle = document.getElementById('hero-title');
+  let heroTitle = document.getElementById('hero-title');
   if (heroTitle) {
     heroTitle.innerText = translations[currentLang][key].hero_title;
   }
 
   
-  var heroSubtitle = document.getElementById('hero-subtitle');
+  let heroSubtitle = document.getElementById('hero-subtitle');
   if (heroSubtitle) {
     heroSubtitle.innerText = translations[currentLang][key].hero_subtitle;
   }
 
   
-  var heroBtn = document.getElementById('hero-btn');
+  let heroBtn = document.getElementById('hero-btn');
   if (heroBtn) {
     heroBtn.innerText = translations[currentLang][key].hero_btn;
   }
 
   
-  var cartTitle = document.getElementById('cart-title');
+  let cartTitle = document.getElementById('cart-title');
   if (cartTitle) {
     cartTitle.innerText = translations[currentLang][key].cart_title;
   }
 
 
-  var cartTotalText = document.getElementById('cart-total-text');
+  let cartTotalText = document.getElementById('cart-total-text');
   if (cartTotalText) {
     cartTotalText.innerText = translations[currentLang][key].cart_total;
   }
 
   
-  var nameInput = document.getElementById('name-input');
+  let nameInput = document.getElementById('name-input');
   if (nameInput) {
     nameInput.placeholder = translations[currentLang][key].name;
   }
 
   
-  var messageInput = document.getElementById('message-input');
+  let messageInput = document.getElementById('message-input');
   if (messageInput) {
     messageInput.placeholder = translations[currentLang][key].message;
   }
-  alert (localStorage)
+ 
 }
 
 
