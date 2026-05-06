@@ -103,7 +103,7 @@ let activeFilters = {
 };
 
 let currentLang = localStorage.getItem('lang') || 'ru';
-
+//let currentLang='ru';
 const translations = {
     ru:{
         sale_product:"Скидка!",
@@ -227,105 +227,44 @@ const translations = {
     }
 
 };
-/*
+
+
+
 function updateLanguage() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                el.placeholder = translations[currentLang][key];
-            } else {
-                el.innerText = translations[currentLang][key];
-            }
-        }
-    });
+        const t = translations[currentLang]?.[el.dataset.i18n];
+        if (t) el.innerText = t;
+      });
+
+      
     document.getElementById('lang-switch').innerText = currentLang === 'ru' ? 'EN' : 'RU';
-    
-    const heroH1 = document.querySelector('.hero-content h1');
+  
+    let heroH1 = document.querySelector('.hero-content h1');
     if (heroH1) heroH1.innerText = translations[currentLang].hero_title;
-    const heroP = document.querySelector('.hero-content p');
+  
+    let heroP = document.querySelector('.hero-content p');
     if (heroP) heroP.innerText = translations[currentLang].hero_subtitle;
-    const heroBtn = document.querySelector('.hero-content .btn');
+  
+    let heroBtn = document.querySelector('.hero-content .btn');
     if (heroBtn) heroBtn.innerText = translations[currentLang].hero_btn;
-    
-    const cartH2 = document.querySelector('.cart-header h2');
+  
+    let cartH2 = document.querySelector('.cart-header h2');
     if (cartH2) cartH2.innerText = translations[currentLang].cart_title;
-    const cartTotalSpan = document.querySelector('.cart-total span:first-child');
+  
+    let cartTotalSpan = document.querySelector('.cart-total span:first-child');
     if (cartTotalSpan) cartTotalSpan.innerText = translations[currentLang].cart_total;
-    
+  
     renderProducts();
     updateCartUI();
-}*/
-
-  
-  
-function updateLanguage() {
-
- 
-  let langBtn = document.getElementById('lang-switch');
-  if (langBtn) {
-    if (currentLang === 'ru') {
-      langBtn.innerText = 'EN';
-    } else {
-      langBtn.innerText = 'RU';
-    }
-  }
-
-  
-  let heroTitle = document.getElementById('hero-title');
-  if (heroTitle) {
-    heroTitle.innerText = translations[currentLang][key].hero_title;
-  }
-
-  
-  let heroSubtitle = document.getElementById('hero-subtitle');
-  if (heroSubtitle) {
-    heroSubtitle.innerText = translations[currentLang][key].hero_subtitle;
-  }
-
-  
-  let heroBtn = document.getElementById('hero-btn');
-  if (heroBtn) {
-    heroBtn.innerText = translations[currentLang][key].hero_btn;
-  }
-
-  
-  let cartTitle = document.getElementById('cart-title');
-  if (cartTitle) {
-    cartTitle.innerText = translations[currentLang][key].cart_title;
   }
 
 
-  let cartTotalText = document.getElementById('cart-total-text');
-  if (cartTotalText) {
-    cartTotalText.innerText = translations[currentLang][key].cart_total;
+
+  function toggleLanguage() {
+    currentLang = currentLang === 'ru' ? 'en' : 'ru';
+    localStorage.setItem('lang', currentLang);
+    updateLanguage();
   }
-
-  
-  let nameInput = document.getElementById('name-input');
-  if (nameInput) {
-    nameInput.placeholder = translations[currentLang][key].name;
-  }
-
-  
-  let messageInput = document.getElementById('message-input');
-  if (messageInput) {
-    messageInput.placeholder = translations[currentLang][key].message;
-  }
- 
-}
-
-
-document.getElementById('lang-switch').onclick = function() {
-  if (currentLang === 'ru') {
-    currentLang = 'RU';
-  } else {
-    currentLang = 'EN';
-  }
- 
-  
-};
-
 
 
 
@@ -515,7 +454,9 @@ function updateAuthUI() {
         authBtn.onclick = () => document.getElementById('auth-modal').style.display = 'block';
     }
 }
+function clearChekout(){
 
+}
 function setupEventListeners() {
     const cartBtn = document.getElementById('cart-btn');
     const cartSidebar = document.getElementById('cart-sidebar');
@@ -605,6 +546,7 @@ function setupEventListeners() {
     });
 
     document.getElementById('auth-form').onsubmit = handleAuth;
+    clearChekout();
 }
 
 
@@ -625,32 +567,7 @@ function switchAuth(mode) {
         submitBtn.innerText = translations[currentLang].auth_submit_register;
     }
 }
-/*
-function handleAuth(e) {
-    e.preventDefault();
-    const email = document.getElementById('auth-email').value;
-    const password = document.getElementById('auth-password').value;
- 
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    if (authMode === 'register') {
-        if (users.find(u => u.email === email)) return;
-        users.push({ email, password, name: '' });
-        localStorage.setItem('users', JSON.stringify(users));
-        switchAuth('login');
-        clearForm();
-    } else {
-        const user = users.find(u => u.email === email && u.password === password);
-        if (user) {
-            currentUser = user;
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            document.getElementById('auth-modal').style.display = 'none';
-            updateAuthUI();
-            renderProducts();
-            showNotification(translations[currentLang].notification_login);
-        }
-    }
- 
-}*/
+
 function handleAuth(e) {
     e.preventDefault();
     const email = document.getElementById('auth-email').value;
@@ -705,11 +622,7 @@ function handleAuth(e) {
 
 
 
-function toggleLanguage() {
-    currentLang = currentLang === 'ru' ? 'en' : 'ru';
-    localStorage.setItem('lang', currentLang);
-    updateLanguage();
-}
+
 
 document.addEventListener('DOMContentLoaded', () => {//document object model
     renderProducts();
