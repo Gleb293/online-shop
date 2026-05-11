@@ -784,9 +784,14 @@ header {
     width: 100%;
     border-radius: 10px;
 }
-
+.detail-info{
+    display: flex;
+    flex-direction: column;
+    gap: 20;
+}
 .detail-info h2 {
     margin-bottom: 1rem;
+  
 }
 
 .full-desc {

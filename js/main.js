@@ -407,6 +407,7 @@ function removeFromCart(productId) {
     updateCartUI();
 }
 
+
 function updateCartUI() {
     const count = cart.reduce((sum, item) => sum + item.quantity, 0);
     document.getElementById('cart-count').innerText = count;
@@ -454,9 +455,7 @@ function updateAuthUI() {
         authBtn.onclick = () => document.getElementById('auth-modal').style.display = 'block';
     }
 }
-function clearChekout(){
 
-}
 function setupEventListeners() {
     const cartBtn = document.getElementById('cart-btn');
     const cartSidebar = document.getElementById('cart-sidebar');
@@ -467,18 +466,25 @@ function setupEventListeners() {
     const closeProduct = document.querySelector('.close-product');
     const closeCheckout = document.querySelector('.close-checkout');
     const langSwitch = document.getElementById('lang-switch');
+    const formCheckout=document.getElementById('checkout-form');
+    const openCheckout=document.getElementById('open-checkout');
+    const checkoutModal=document.getElementById('checkout-modal');
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatWindow = document.getElementById('chat-window');
+    const chatForm = document.getElementById('chat-form');
+    const chatMessages = document.getElementById('chat-messages');
 
     langSwitch.onclick = toggleLanguage;
 
-    document.getElementById('open-checkout').onclick = () => {
+    openCheckout.onclick = () => {
         if (cart.length === 0) return showNotification('Корзина пуста!');
-        document.getElementById('checkout-modal').style.display = 'block';
+        checkoutModal .style.display = 'block';
     };
 
     closeCheckout.onclick = () => {
-        document.getElementById('checkout-modal').style.display = 'none';
+        checkoutModal.style.display = 'none';
     };
-    document.getElementById('checkout-form').onsubmit = (e) => {
+    formCheckout.onsubmit = (e) => {
         e.preventDefault();
         const orderData = {
             firstName: document.getElementById('checkout-first-name').value,
@@ -497,17 +503,15 @@ function setupEventListeners() {
         cart = [];
         saveCart();
         updateCartUI();
-        document.getElementById('checkout-modal').style.display = 'none';
+        formCheckout.reset();
+        checkoutModal.style.display = 'none';
         showNotification(translations[currentLang].notification_order);
     };
 
     cartBtn.onclick = () => cartSidebar.classList.add('active');
     closeCart.onclick = () => cartSidebar.classList.remove('active');
     
-    const chatToggle = document.getElementById('chat-toggle');
-    const chatWindow = document.getElementById('chat-window');
-    const chatForm = document.getElementById('chat-form');
-    const chatMessages = document.getElementById('chat-messages');
+ 
 
     chatToggle.onclick = () => chatWindow.classList.toggle('active');
     
@@ -570,6 +574,8 @@ function switchAuth(mode) {
 
 function handleAuth(e) {
     e.preventDefault();
+
+    const formAuth=document.getElementById("auth-form");
     const email = document.getElementById('auth-email').value;
     const password = document.getElementById('auth-password').value;
  
@@ -602,9 +608,12 @@ function handleAuth(e) {
         } else {
             showNotification(currentLang === 'ru' ? 'Неверный логин или пароль' : 'Invalid email or password');
         }
-        clearForm();
+       formAuth.reset();
     }
+     
 }
+
+
 
 
 
